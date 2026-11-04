@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sparse-anchors"
+version = "0.1.0"
+description = "Sparse-anchor visual multi-session registration in changing environments."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "gsplat",
+  "numpy<2",
+  "opencv-python",
+  "pycolmap==4.0.4",
+  "scipy",
+  "setuptools>=68,<82",
+  "torch==2.10.0+cu128",
+  "tqdm",
+  "transformers>=4.56",
+]
+
+[project.scripts]
+sparse-anchors = "sparse_anchors.splatting.main:main"
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "ruff",
+]
+viewer = [
+  "matplotlib",
+  "nerfview==0.1.3",
+  "splines",
+]
+matching = [
+  "matplotlib",
+  "torchaudio==2.10.0+cu128", # uniception requires it; match Torch's binary version.
+  "vismatch==1.2.1",
+]
+da3 = [
+  "addict",
+  "einops",
+  "evo",
+  "imageio",
+  "matplotlib",
+  "moviepy==1.0.3",
+  "omegaconf",
+  "pillow",
+  "plyfile",
+  "torchvision==0.25.0",
+  "trimesh",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchaudio = { index = "pytorch-cu128" }
+gsplat = { git = "https://github.com/nerfstudio-project/gsplat", branch = "main" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+extend-select = ["I"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+markers = ["integration: requires an external dataset"]
