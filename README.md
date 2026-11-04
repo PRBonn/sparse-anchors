@@ -1,21 +1,18 @@
 <h1 align="center">Sparse Anchors for Visual Multi-Session Registration in Changing Environments</h1>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2611.05084"><img src="https://img.shields.io/badge/Paper-arXiv%3A2611.05084-b31b1b?style=flat-square&logo=arxiv&logoColor=white" alt="Paper: arXiv:2611.05084"></a>
-</p>
-
-<p align="center">
   <a href="https://scholar.google.com/citations?user=BN7LeywAAAAJ">Yunus Talha Erzurumlu</a> ·
   <a href="https://scholar.google.de/citations?hl=en&user=_xJ5rVwAAAAJ">Niklas Trekel</a> ·
-  <a href="https://www.ipb.uni-bonn.de/people/saurabh-gupta/index.html">Saurabh Gupta</a> ·
+  <a href="https://scholar.google.com/citations?user=qCVVRqIAAAAJ&hl">Saurabh Gupta</a> ·
   <a href="https://www.ipb.uni-bonn.de/people/nico-koltermann/index.html">Nico Koltermann</a> ·
   <a href="https://scholar.google.com/citations?hl=en&oi=ao&user=YwPsGKQAAAAJ">Olga Vysotska</a> ·
-  <a href="https://www.ipb.uni-bonn.de/people/jens-behley/index.html">Jens Behley</a> ·
-  <a href="https://www.ipb.uni-bonn.de/people/louis-wiesmann/index.html">Louis Wiesmann</a> ·
+  <a href="https://scholar.google.com/citations?user=L4LZHXsAAAAJ&hl">Jens Behley</a> ·
+  <a href="https://scholar.google.com/citations?user=EEyCOpIAAAAJ&hl">Louis Wiesmann</a> ·
   <a href="https://scholar.google.com/citations?user=8vib2lAAAAAJ">Cyrill Stachniss</a>
 </p>
 
 <p align="center">
+  <a href="https://arxiv.org/abs/2611.05084"><img src="https://img.shields.io/badge/Paper-arXiv%3A2611.05084-b31b1b?style=flat-square&logo=arxiv&logoColor=white" alt="Paper: arXiv:2611.05084"></a>
   <img src="https://img.shields.io/badge/Python-3.11%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.11+">
   <img src="https://img.shields.io/badge/Ubuntu-24.04-E95420?style=flat-square&logo=ubuntu&logoColor=white" alt="Ubuntu 24.04">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License: MIT"></a>
