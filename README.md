@@ -4,7 +4,7 @@
   <a href="https://scholar.google.com/citations?user=BN7LeywAAAAJ">Yunus Talha Erzurumlu</a> ·
   <a href="https://scholar.google.de/citations?hl=en&user=_xJ5rVwAAAAJ">Niklas Trekel</a> ·
   <a href="https://scholar.google.com/citations?user=qCVVRqIAAAAJ&hl">Saurabh Gupta</a> ·
-  <a href="hhttps://scholar.google.com/citations?user=uvXUdWwAAAAJ&hl">Nico Koltermann</a> ·
+  <a href="https://scholar.google.com/citations?user=uvXUdWwAAAAJ&hl">Nico Koltermann</a> ·
   <a href="https://scholar.google.com/citations?hl=en&oi=ao&user=YwPsGKQAAAAJ">Olga Vysotska</a> ·
   <a href="https://scholar.google.com/citations?user=L4LZHXsAAAAJ&hl">Jens Behley</a> ·
   <a href="https://scholar.google.com/citations?user=EEyCOpIAAAAJ&hl">Louis Wiesmann</a> ·
