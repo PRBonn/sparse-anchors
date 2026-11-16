@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 from collections import defaultdict
@@ -30,6 +31,9 @@ from sparse_anchors.utils.io import load_splat_checkpoint
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path, default=config.output_dir / "pnp")
+    output_dir = parser.parse_args().output_dir
     device = torch.device(config.device)
 
     reference_scene = normalize_scene(
@@ -46,14 +50,14 @@ def main():
     query_data = SessionData(
         load_colmap_model(sparse_dir=config.query_sparse_dir, images_dir=config.query_images_dir).frames
     )
-    config.output_dir.mkdir(parents=True, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     checkpoint = load_splat_checkpoint(config.checkpoint, device)
     model, sh_degree, packed = checkpoint.model, checkpoint.sh_degree, checkpoint.packed
 
-    query_vpr_cache = config.output_dir / "cache" / "vpr" / "query.npy"
-    reference_vpr_cache = config.output_dir / "cache" / "vpr" / "reference.npy"
-    match_cache_dir = config.output_dir / "cache" / "matches"
+    query_vpr_cache = output_dir / "cache" / "vpr" / "query.npy"
+    reference_vpr_cache = output_dir / "cache" / "vpr" / "reference.npy"
+    match_cache_dir = output_dir / "cache" / "matches"
     match_cache_dir.mkdir(parents=True, exist_ok=True)
     vpr_model = None
     if not query_vpr_cache.exists() or not reference_vpr_cache.exists():
@@ -130,7 +134,7 @@ def main():
         f"(radius {far_radius:.3f} SfM units, {config.vpr_far_radius_fraction:.0%} of reference diameter); "
         f"{len(retrievals)} retrieval candidates ({config.vpr_top_k} per retained query)"
     )
-    (config.output_dir / "retrievals.json").write_text(json.dumps(retrievals, indent=2) + "\n")
+    (output_dir / "retrievals.json").write_text(json.dumps(retrievals, indent=2) + "\n")
     match_rows = []
     pose_rows = []
     eligible_match_count = 0
@@ -306,8 +310,8 @@ def main():
         )
 
     print(f"PnP succeeded for {len(pose_rows)}/{eligible_match_count} match-qualified image pairs")
-    (config.output_dir / "match_rows.json").write_text(json.dumps(match_rows, indent=2) + "\n")
-    pose_estimates_path = write_pose_estimates(pose_rows, config.output_dir, scale)
+    (output_dir / "match_rows.json").write_text(json.dumps(match_rows, indent=2) + "\n")
+    pose_estimates_path = write_pose_estimates(pose_rows, output_dir, scale)
     print(f"saved pose estimates to {pose_estimates_path}")
 
 

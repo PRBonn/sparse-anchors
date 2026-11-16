@@ -351,7 +351,7 @@ def write_json(
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Refine featuremetric poses and write render-vs-real diagonals.")
     parser.add_argument("--target", choices=("reference", "query"), default="query")
-    parser.add_argument("--pose-estimates", type=Path, default=config.output_dir / "pose_estimates.json")
+    parser.add_argument("--pose-estimates", type=Path, default=config.output_dir / "pnp" / "pose_estimates.json")
     parser.add_argument("--pose-index", type=int, default=0)
     parser.add_argument("--all-poses", action="store_true")
     parser.add_argument("--max-poses", type=int)

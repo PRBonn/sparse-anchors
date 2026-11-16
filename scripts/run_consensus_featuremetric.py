@@ -23,13 +23,14 @@ def write_json(path: Path, value) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--consensus-dir", type=Path, default=config.output_dir / "consensus")
+    parser.add_argument("--pose-graph-dir", type=Path, default=config.output_dir / "pose_graph")
     parser.add_argument("--output-dir", type=Path, default=config.output_dir / "featuremetric")
     parser.add_argument("--max-anchors", type=int, help="Limit refinements for a small test run")
     args = parser.parse_args()
 
     consensus = json.loads((args.consensus_dir / "consensus.json").read_text())
     base_trajectory = json.loads((args.consensus_dir / "consensus_trajectory.json").read_text())
-    pnp_trajectory = json.loads((args.consensus_dir / "consensus_pgo_trajectory.json").read_text())
+    pnp_trajectory = json.loads((args.pose_graph_dir / "consensus_trajectory.json").read_text())
     timestamps = list(base_trajectory)
     index = {timestamp: i for i, timestamp in enumerate(timestamps)}
     base = np.asarray(list(base_trajectory.values()), dtype=np.float64)

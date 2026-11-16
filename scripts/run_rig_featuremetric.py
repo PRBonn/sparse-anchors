@@ -165,7 +165,7 @@ def run_checkpoint_experiment(
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Joint featuremetric refinement for virtual-camera rigs.")
-    parser.add_argument("--pose-estimates", type=Path, default=config.output_dir / "pose_estimates.json")
+    parser.add_argument("--pose-estimates", type=Path, default=config.output_dir / "pnp" / "pose_estimates.json")
     parser.add_argument("--checkpoints", type=Path, nargs="+", default=[config.checkpoint])
     parser.add_argument("--output-root", type=Path, default=Path("media/registration/rig_featuremetric"))
     parser.add_argument("--query-sparse-dir", type=Path, default=config.query_sparse_dir)

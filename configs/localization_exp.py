@@ -2,8 +2,13 @@ from pathlib import Path
 
 from sparse_anchors.localization.types import PnPConfig
 
-reference_root = Path("/path/to/hilti/floor_1_2025-05-05_run_1_pinhole")
-query_root = Path("/path/to/hilti/floor_1_2025-07-07_run_1_pinhole")
+# Replace the path placeholders before running the pipeline. For this example,
+# <HILTI_DATA_ROOT> contains the prepared Floor 1 sessions below.
+data_root = Path("<HILTI_DATA_ROOT>")
+reference_session = data_root / "floor_1_2025-05-05_run_1_pinhole"
+query_session = data_root / "floor_1_2025-07-07_run_1_pinhole"
+reference_root = reference_session
+query_root = query_session
 
 reference_sparse_dir = reference_root / "colmap_loma_rig" / "sparse" / "0"
 reference_images_dir = reference_root / "colmap_loma_rig" / "images"
@@ -13,11 +18,12 @@ query_images_dir = query_root / "colmap_loma_rig" / "images"
 query_frames_csv = query_root / "frames.csv"
 
 feature_manifest = reference_root / "colmap_loma_rig/features/dinov3/manifest.json"
-checkpoint = Path("/path/to/hilti/splat_runs/reference/checkpoint_060000.pt")
+reference_splat_run = Path("<REFERENCE_SPLAT_RUN>")
+checkpoint = reference_splat_run / "checkpoint_060000.pt"
 
 device = "cuda"
 reference_test_every = 8
-output_dir = Path("/path/to/hilti/localization/floor1_2025-05-05_to_2025-07-07")
+output_dir = Path("<LOCALIZATION_OUTPUT_DIR>")
 
 vpr_image_size = 322
 vpr_batch_size = 8

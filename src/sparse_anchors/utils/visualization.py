@@ -175,6 +175,31 @@ def plot_pnp_estimates_map(
     return fig, ax
 
 
+def plot_pose_result_map(
+    query_xy_by_timestamp: Mapping[str, np.ndarray],
+    reference_xy_by_timestamp: Mapping[str, np.ndarray],
+    poses: Sequence[Mapping],
+    title: str,
+    floorplan: np.ndarray | None = None,
+    floorplan_extent: tuple[float, float, float, float] | None = None,
+    show: bool = True,
+):
+    """Show a localized trajectory or sparse anchor set against GT tracks."""
+    fig, ax = _map_figure(floorplan, floorplan_extent)
+    _plot_pose_tracks(ax, query_xy_by_timestamp, reference_xy_by_timestamp)
+
+    estimated_xy = np.asarray([np.asarray(row["c2w"], dtype=np.float64)[:2, 3] for row in poses])
+    timestamps = [str(row["query_timestamp"]) for row in poses]
+    if len(estimated_xy) > 1 and len(set(timestamps)) == len(timestamps) and timestamps == sorted(timestamps, key=float):
+        ax.plot(estimated_xy[:, 0], estimated_xy[:, 1], color="tab:purple", linewidth=1.2, alpha=0.8)
+    if len(estimated_xy):
+        ax.scatter(estimated_xy[:, 0], estimated_xy[:, 1], s=24, color="tab:purple", label="Estimated", zorder=6)
+
+    ax.set_title(f"{title}: {len(poses)} poses")
+    _finish_map(ax, show)
+    return fig, ax
+
+
 def _map_figure(
     floorplan: np.ndarray | None,
     floorplan_extent: tuple[float, float, float, float] | None,

@@ -48,7 +48,7 @@ def load_query_rig_trajectory(data: SessionData, rig_camera_name: str) -> tuple[
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--pose-file", type=Path, default=config.output_dir / "pose_estimates.json")
+    parser.add_argument("--pose-file", type=Path, default=config.output_dir / "pnp" / "pose_estimates.json")
     parser.add_argument("--output-dir", type=Path, default=config.output_dir / "consensus")
     args = parser.parse_args()
 

@@ -13,9 +13,12 @@ from sparse_anchors.localization.pose_graph import optimize_pose_graph, sigmas
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--consensus-dir", type=Path, default=config.output_dir / "consensus")
+    parser.add_argument("--output-dir", type=Path, default=config.output_dir / "pose_graph")
     args = parser.parse_args()
 
     consensus_dir = args.consensus_dir
+    output_dir = args.output_dir
+    output_dir.mkdir(parents=True, exist_ok=True)
     consensus = json.loads((consensus_dir / "consensus.json").read_text())
     trajectory = json.loads((consensus_dir / "consensus_trajectory.json").read_text())
     timestamps = list(trajectory)
@@ -43,7 +46,7 @@ def main() -> None:
         "prior_sigmas": prior_sigmas.tolist(),
     }
     for name, (num_anchors, optimized, info) in solutions.items():
-        output_path = consensus_dir / f"{name}_pgo_trajectory.json"
+        output_path = output_dir / f"{name}_trajectory.json"
         output_path.write_text(
             json.dumps(
                 {timestamp: pose.tolist() for timestamp, pose in zip(timestamps, optimized, strict=True)}, indent=2
@@ -53,7 +56,7 @@ def main() -> None:
         metrics[name] = {"anchors": num_anchors, **info}
         print(f"{name}: {num_anchors} anchors, cost={info['cost']:.6f}; saved {output_path}")
 
-    metrics_path = consensus_dir / "pose_graph_metrics.json"
+    metrics_path = output_dir / "metrics.json"
     metrics_path.write_text(json.dumps(metrics, indent=2) + "\n")
     print(f"Saved {metrics_path}")
 
